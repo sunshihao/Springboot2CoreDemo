@@ -1,0 +1,37 @@
+server:
+  port: 8030
+
+logging:
+#日志配置文件位置
+  config: classpath:log/logback.xml
+#日志打印位置，这里是默认在项目根路径下
+  path: log/spring-boot-log
+
+spring:
+  datasource:
+       platform: oracle
+       url: jdbc:oracle:thin:@127.0.0.1:1521/orcl
+       username: xtmcs
+       password: xtmcs
+       driverClassName: oracle.jdbc.driver.OracleDriver
+       max-active: 10
+       max-idle: 5
+       min-idle: 2
+       initial-size: 6
+       validation-query: select 1 from dual
+       test-while-idle: true
+       druid:
+        driver-class-name: oracle.jdbc.OracleDriver
+        url: jdbc:oracle:thin:@127.0.0.1:1521/orcl
+        username: xtmcs
+        password: xtmcs
+        stat-view-servlet:
+          url-pattern: /druid/*
+          reset-enable: true
+          login-username: sssh
+          login-password: sssh
+        web-stat-filter:
+          url-pattern: /*
+          exclusions: "*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/*"
+
+
