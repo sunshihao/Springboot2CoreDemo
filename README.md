@@ -8,3 +8,5 @@
 2.mybatis
 3.redis集群
 4.dubbo
+5.swagger
+6.oracle
