@@ -1,8 +1,14 @@
 server:
   port: 8025
 
+logging:
+#日志配置文件位置
+  config: classpath:log/logback.xml
+#日志打印位置，这里是默认在项目根路径下
+  path: log/spring-boot-log
+
 spring:
-    datasource:
+  datasource:
        platform: oracle
        url: jdbc:oracle:thin:@127.0.0.1:1521/orcl
        username: xtmcs
