@@ -1,5 +1,5 @@
 # Springboot2CoreDemo
-以springboot为核心的架构，向周围发散。
+以springboot2为核心的架构，向周围发散。
 
 初始化springboot2
 
