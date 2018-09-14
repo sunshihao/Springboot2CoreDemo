@@ -1,11 +1,11 @@
 server:
   port: 8025
 
-#logging:
+logging:
 ##日志配置文件位置
-#  config: classpath:log/logback.xml
+  config: resources/log/logback.xml
 ##日志打印位置，这里是默认在项目根路径下
-#  path: classpath:log/spring-boot-sssh-log
+  path: resources/log/spring-boot-sssh-log
 
 spring:
    datasource:

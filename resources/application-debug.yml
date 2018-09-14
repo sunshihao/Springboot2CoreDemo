@@ -2,10 +2,10 @@ server:
   port: 8025
 
 #logging:
-##日志配置文件位置
-#  config: classpath:log/logback.xml
-##日志打印位置，这里是默认在项目根路径下
-#  path: classpath:log/spring-boot-sssh-log
+###日志配置文件位置
+#  config: resources/log/logback.xml
+###日志打印位置，这里是默认在项目根路径下
+#  path: resources/log/spring-boot-sssh-log
 
 spring:
    datasource:
@@ -14,31 +14,31 @@ spring:
         username: xtmcs
         password: xtmcs
         driverClassName: oracle.jdbc.driver.OracleDriver
-#        druid:
+        druid:
 #          platform: oracle
 #          url: jdbc:oracle:thin:@127.0.0.1:1521/orcl
 #          username: xtmcs
 #          password: xtmcs
 #          driverClassName: oracle.jdbc.driver.OracleDriver
           # 初始化大小，最小，最大
-        initial-size: 5
-        max-active: 20
-        min-idle: 5
-        # 超时时间
-        max-wait: 60000
+           initial-size: 5
+           max-active: 20
+           min-idle: 5
+           # 超时时间
+           max-wait: 60000
            # 打开PScache，并制定每个连接上PScache的大小
-        pool-prepared-statement: true
-        max-pool-prepared-statement-per-connection-size: 20
+           pool-prepared-statement: true
+           max-pool-prepared-statement-per-connection-size: 20
 #       max-open-prepared-statements #和上面的等价
-        validation-query: SELECT 1 FROM DUAL
+           validation-query: SELECT 1 FROM DUAL
 #       validation-query-timeout:
-        test-on-borrow: false
-        test-on-return: false
-        test-while-idle: true
+           test-on-borrow: false
+           test-on-return: false
+           test-while-idle: true
           # 配置检测隔多久才进行一次检测，检测需要关闭的空闲连接，单位毫秒
-        time-between-eviction-runs-millis: 60000
+           time-between-eviction-runs-millis: 60000
           # 配置一个连接在池中最小的生存时间，单位毫秒
-        min-evictable-idle-time-millis: 300000
+           min-evictable-idle-time-millis: 300000
            #max-evictable-idle-time-millis
           #filters: #配置多个英文逗号分隔
         stat-view-servlet:
