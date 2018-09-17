@@ -58,11 +58,19 @@
 			<version>11.2.0.1.0</version>
 		</dependency>
 
+		<!--<dependency>-->
+			<!--<groupId>com.alibaba</groupId>-->
+			<!--&lt;!&ndash;由druid 转换成 druid-spring-boot-starter&ndash;&gt;-->
+			<!--<artifactId>druid</artifactId>-->
+			<!--<version>1.1.4</version>-->
+		<!--</dependency>-->
+
 		<dependency>
 			<groupId>com.alibaba</groupId>
-			<artifactId>druid</artifactId>
-			<version>1.1.4</version>
+			<artifactId>druid-spring-boot-starter</artifactId>
+			<version>1.1.10</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-api</artifactId>

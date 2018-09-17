@@ -1,48 +1,56 @@
 package com.sssh.setting;
 
+import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.sql.DataSource;
+
 /**
  * ========================
- * Created with IntelliJ IDEA.
- * User：恒宇少年
- * Date：2017/4/5
- * Time：21:46
- * 码云：http://git.oschina.net/jnyqy
+ *  这种配置的配置项多样一些，而且配置集中，资料多
  * ========================
  */
+
+// Configuration 将一个类看做beans的xml配置
 @Configuration
 public class DruidConfiguration {
 
     @Bean
-    public ServletRegistrationBean statViewServlet(){
+    public ServletRegistrationBean statViewServlet() {
         //创建servlet注册实体
-        ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean(new StatViewServlet(),"/druid/*");
+        ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean(new StatViewServlet(), "/druid/*");
         //设置ip白名单
-        servletRegistrationBean.addInitParameter("allow","127.0.0.1");
+        servletRegistrationBean.addInitParameter("allow", "127.0.0.1");
         //设置ip黑名单，如果allow与deny共同存在时,deny优先于allow
-        servletRegistrationBean.addInitParameter("deny","192.168.0.19");
+        servletRegistrationBean.addInitParameter("deny", "192.168.0.19");
         //设置控制台管理用户
-        servletRegistrationBean.addInitParameter("loginUsername","druid");
-        servletRegistrationBean.addInitParameter("loginPassword","123456");
+        servletRegistrationBean.addInitParameter("loginUsername", "druid");
+        servletRegistrationBean.addInitParameter("loginPassword", "123456");
         //是否可以重置数据
-        servletRegistrationBean.addInitParameter("resetEnable","false");
+        servletRegistrationBean.addInitParameter("resetEnable", "false");
         return servletRegistrationBean;
     }
 
     @Bean
-    public FilterRegistrationBean statFilter(){
+    public FilterRegistrationBean statFilter() {
         //创建过滤器
         FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean(new WebStatFilter());
         //设置过滤器过滤路径
         filterRegistrationBean.addUrlPatterns("/*");
         //忽略过滤的形式
-        filterRegistrationBean.addInitParameter("exclusions","*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*");
+        filterRegistrationBean.addInitParameter("exclusions", "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*");
         return filterRegistrationBean;
+    }
+
+    @Bean
+    @ConfigurationProperties(prefix = "spring.datasource")
+    public DataSource druidDataSource(){
+        return new DruidDataSource();
     }
 }

@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis.mapper.CnUserDAO">
+  <resultMap id="BaseResultMap" type="com.mybatis.model.CnUser">
+    <id column="OPERID" jdbcType="VARCHAR" property="operid" />
+    <id column="BANKID" jdbcType="DECIMAL" property="bankid" />
+    <result column="INSTCODE" jdbcType="VARCHAR" property="instcode" />
+    <result column="OPERNAME" jdbcType="VARCHAR" property="opername" />
+    <result column="PASS" jdbcType="VARCHAR" property="pass" />
+    <result column="PASSDATE" jdbcType="VARCHAR" property="passdate" />
+    <result column="DEPARTMENT" jdbcType="VARCHAR" property="department" />
+    <result column="TYPE" jdbcType="VARCHAR" property="type" />
+    <result column="SEX" jdbcType="VARCHAR" property="sex" />
+    <result column="BIRTH" jdbcType="VARCHAR" property="birth" />
+    <result column="CERTNO" jdbcType="VARCHAR" property="certno" />
+    <result column="TEL" jdbcType="VARCHAR" property="tel" />
+    <result column="EMAIL" jdbcType="VARCHAR" property="email" />
+    <result column="ADDRESS" jdbcType="VARCHAR" property="address" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="STAID" jdbcType="VARCHAR" property="staid" />
+    <result column="STANAME" jdbcType="VARCHAR" property="staname" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    OPERID, BANKID, INSTCODE, OPERNAME, PASS, PASSDATE, DEPARTMENT, `TYPE`, SEX, BIRTH, 
+    CERTNO, TEL, EMAIL, ADDRESS, `STATUS`, STAID, STANAME
+  </sql>
+  <select id="selectByExample" parameterType="com.mybatis.model.CnUserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from XTMCS.CN_USER
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="com.mybatis.model.CnUserKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from XTMCS.CN_USER
+    where OPERID = #{operid,jdbcType=VARCHAR}
+      and BANKID = #{bankid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.mybatis.model.CnUserKey">
+    delete from XTMCS.CN_USER
+    where OPERID = #{operid,jdbcType=VARCHAR}
+      and BANKID = #{bankid,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.mybatis.model.CnUserExample">
+    delete from XTMCS.CN_USER
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.mybatis.model.CnUser">
+    insert into XTMCS.CN_USER (OPERID, BANKID, INSTCODE, 
+      OPERNAME, PASS, PASSDATE, 
+      DEPARTMENT, `TYPE`, SEX, 
+      BIRTH, CERTNO, TEL, 
+      EMAIL, ADDRESS, `STATUS`, 
+      STAID, STANAME)
+    values (#{operid,jdbcType=VARCHAR}, #{bankid,jdbcType=DECIMAL}, #{instcode,jdbcType=VARCHAR}, 
+      #{opername,jdbcType=VARCHAR}, #{pass,jdbcType=VARCHAR}, #{passdate,jdbcType=VARCHAR}, 
+      #{department,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+      #{birth,jdbcType=VARCHAR}, #{certno,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{staid,jdbcType=VARCHAR}, #{staname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mybatis.model.CnUser">
+    insert into XTMCS.CN_USER
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="operid != null">
+        OPERID,
+      </if>
+      <if test="bankid != null">
+        BANKID,
+      </if>
+      <if test="instcode != null">
+        INSTCODE,
+      </if>
+      <if test="opername != null">
+        OPERNAME,
+      </if>
+      <if test="pass != null">
+        PASS,
+      </if>
+      <if test="passdate != null">
+        PASSDATE,
+      </if>
+      <if test="department != null">
+        DEPARTMENT,
+      </if>
+      <if test="type != null">
+        `TYPE`,
+      </if>
+      <if test="sex != null">
+        SEX,
+      </if>
+      <if test="birth != null">
+        BIRTH,
+      </if>
+      <if test="certno != null">
+        CERTNO,
+      </if>
+      <if test="tel != null">
+        TEL,
+      </if>
+      <if test="email != null">
+        EMAIL,
+      </if>
+      <if test="address != null">
+        ADDRESS,
+      </if>
+      <if test="status != null">
+        `STATUS`,
+      </if>
+      <if test="staid != null">
+        STAID,
+      </if>
+      <if test="staname != null">
+        STANAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="operid != null">
+        #{operid,jdbcType=VARCHAR},
+      </if>
+      <if test="bankid != null">
+        #{bankid,jdbcType=DECIMAL},
+      </if>
+      <if test="instcode != null">
+        #{instcode,jdbcType=VARCHAR},
+      </if>
+      <if test="opername != null">
+        #{opername,jdbcType=VARCHAR},
+      </if>
+      <if test="pass != null">
+        #{pass,jdbcType=VARCHAR},
+      </if>
+      <if test="passdate != null">
+        #{passdate,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null">
+        #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birth != null">
+        #{birth,jdbcType=VARCHAR},
+      </if>
+      <if test="certno != null">
+        #{certno,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="staid != null">
+        #{staid,jdbcType=VARCHAR},
+      </if>
+      <if test="staname != null">
+        #{staname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.mybatis.model.CnUserExample" resultType="java.lang.Long">
+    select count(*) from XTMCS.CN_USER
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update XTMCS.CN_USER
+    <set>
+      <if test="record.operid != null">
+        OPERID = #{record.operid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankid != null">
+        BANKID = #{record.bankid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.instcode != null">
+        INSTCODE = #{record.instcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.opername != null">
+        OPERNAME = #{record.opername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pass != null">
+        PASS = #{record.pass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.passdate != null">
+        PASSDATE = #{record.passdate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.department != null">
+        DEPARTMENT = #{record.department,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null">
+        `TYPE` = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null">
+        SEX = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.birth != null">
+        BIRTH = #{record.birth,jdbcType=VARCHAR},
+      </if>
+      <if test="record.certno != null">
+        CERTNO = #{record.certno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tel != null">
+        TEL = #{record.tel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null">
+        EMAIL = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null">
+        ADDRESS = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        `STATUS` = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.staid != null">
+        STAID = #{record.staid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.staname != null">
+        STANAME = #{record.staname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update XTMCS.CN_USER
+    set OPERID = #{record.operid,jdbcType=VARCHAR},
+      BANKID = #{record.bankid,jdbcType=DECIMAL},
+      INSTCODE = #{record.instcode,jdbcType=VARCHAR},
+      OPERNAME = #{record.opername,jdbcType=VARCHAR},
+      PASS = #{record.pass,jdbcType=VARCHAR},
+      PASSDATE = #{record.passdate,jdbcType=VARCHAR},
+      DEPARTMENT = #{record.department,jdbcType=VARCHAR},
+      `TYPE` = #{record.type,jdbcType=VARCHAR},
+      SEX = #{record.sex,jdbcType=VARCHAR},
+      BIRTH = #{record.birth,jdbcType=VARCHAR},
+      CERTNO = #{record.certno,jdbcType=VARCHAR},
+      TEL = #{record.tel,jdbcType=VARCHAR},
+      EMAIL = #{record.email,jdbcType=VARCHAR},
+      ADDRESS = #{record.address,jdbcType=VARCHAR},
+      `STATUS` = #{record.status,jdbcType=VARCHAR},
+      STAID = #{record.staid,jdbcType=VARCHAR},
+      STANAME = #{record.staname,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mybatis.model.CnUser">
+    update XTMCS.CN_USER
+    <set>
+      <if test="instcode != null">
+        INSTCODE = #{instcode,jdbcType=VARCHAR},
+      </if>
+      <if test="opername != null">
+        OPERNAME = #{opername,jdbcType=VARCHAR},
+      </if>
+      <if test="pass != null">
+        PASS = #{pass,jdbcType=VARCHAR},
+      </if>
+      <if test="passdate != null">
+        PASSDATE = #{passdate,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null">
+        DEPARTMENT = #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        `TYPE` = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        SEX = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birth != null">
+        BIRTH = #{birth,jdbcType=VARCHAR},
+      </if>
+      <if test="certno != null">
+        CERTNO = #{certno,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        TEL = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `STATUS` = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="staid != null">
+        STAID = #{staid,jdbcType=VARCHAR},
+      </if>
+      <if test="staname != null">
+        STANAME = #{staname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where OPERID = #{operid,jdbcType=VARCHAR}
+      and BANKID = #{bankid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mybatis.model.CnUser">
+    update XTMCS.CN_USER
+    set INSTCODE = #{instcode,jdbcType=VARCHAR},
+      OPERNAME = #{opername,jdbcType=VARCHAR},
+      PASS = #{pass,jdbcType=VARCHAR},
+      PASSDATE = #{passdate,jdbcType=VARCHAR},
+      DEPARTMENT = #{department,jdbcType=VARCHAR},
+      `TYPE` = #{type,jdbcType=VARCHAR},
+      SEX = #{sex,jdbcType=VARCHAR},
+      BIRTH = #{birth,jdbcType=VARCHAR},
+      CERTNO = #{certno,jdbcType=VARCHAR},
+      TEL = #{tel,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      `STATUS` = #{status,jdbcType=VARCHAR},
+      STAID = #{staid,jdbcType=VARCHAR},
+      STANAME = #{staname,jdbcType=VARCHAR}
+    where OPERID = #{operid,jdbcType=VARCHAR}
+      and BANKID = #{bankid,jdbcType=DECIMAL}
+  </update>
+</mapper>

@@ -1,8 +1,6 @@
 server:
   port: 8025
 
-# 恒宇少年的配置
-
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
