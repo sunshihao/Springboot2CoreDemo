@@ -1,6 +1,7 @@
 package com.sssh.service;
  
 import com.sssh.entity.bnUser;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -15,7 +16,12 @@ public class testService {
  
     @Autowired
     private JdbcTemplate jdbcTemplate;
- 
+
+//    @Autowired
+//    CnUser cnUser;
+
+    private SqlSession session;
+
     public List getList(){
     	
         String sql = "select operid as user_id,tel as user_phone,opername as user_name,pass as his_money from cn_user";
@@ -34,4 +40,10 @@ public class testService {
         });
     }
 
+
+//    public List getCnUser(String operid){
+//        cnUser.setOperid(operid);
+//
+//        return null;
+//    }
 }
